@@ -32,7 +32,7 @@ export default function SessionsPage() {
     date: '',
     location: '',
     regency: REGENCIES[0],
-    status: 'AKTIF' as 'AKTIF' | 'SELESAI',
+    status: 'DIJADWALKAN' as 'DIJADWALKAN' | 'AKTIF' | 'SELESAI',
   });
 
   useEffect(() => {
@@ -136,11 +136,14 @@ export default function SessionsPage() {
               <div className="flex justify-between items-start mb-4">
                 <div className={cn(
                   "px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5",
+                  session.status === 'DIJADWALKAN' ? "bg-blue-500/10 text-blue-400 border border-blue-500/20" :
                   session.status === 'AKTIF' ? "bg-amber-500/10 text-amber-500 border border-amber-500/20" : 
                   "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
                 )}>
-                  {session.status === 'AKTIF' ? <Clock className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
-                  {session.status === 'AKTIF' ? 'AKTIF' : 'SELESAI'}
+                  {session.status === 'DIJADWALKAN' ? <CalendarIcon className="w-3 h-3" /> : 
+                   session.status === 'AKTIF' ? <Clock className="w-3 h-3" /> : 
+                   <CheckCircle2 className="w-3 h-3" />}
+                  {session.status}
                 </div>
                 <div className="flex items-center gap-1 opacity-0 group-hover:opacity-100 transition-opacity">
                   <button 
@@ -265,6 +268,7 @@ export default function SessionsPage() {
                       value={formData.status}
                       onChange={(e) => setFormData({...formData, status: e.target.value as any})}
                     >
+                      <option value="DIJADWALKAN">DIJADWALKAN</option>
                       <option value="AKTIF">AKTIF</option>
                       <option value="SELESAI">SELESAI</option>
                     </select>

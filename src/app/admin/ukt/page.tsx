@@ -27,11 +27,14 @@ export default function UKTAssessmentPage() {
               <div className="flex justify-between items-start mb-4">
                 <div className={cn(
                   "px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest flex items-center gap-1.5",
+                  session.status === 'DIJADWALKAN' ? "bg-blue-500/10 text-blue-400 border border-blue-500/20" :
                   session.status === 'AKTIF' ? "bg-amber-500/10 text-amber-500 border border-amber-500/20" : 
                   "bg-emerald-500/10 text-emerald-500 border border-emerald-500/20"
                 )}>
-                  {session.status === 'AKTIF' ? <Clock className="w-3 h-3" /> : <CheckCircle2 className="w-3 h-3" />}
-                  {session.status === 'AKTIF' ? 'AKTIF' : 'SELESAI'}
+                  {session.status === 'DIJADWALKAN' ? <Clock className="w-3 h-3 text-blue-400" /> : 
+                   session.status === 'AKTIF' ? <Clock className="w-3 h-3" /> : 
+                   <CheckCircle2 className="w-3 h-3" />}
+                  {session.status}
                 </div>
                 <div className="text-neutral-500 font-bold text-[10px] uppercase tracking-tighter">
                   {new Date(session.date).toLocaleDateString('id-ID', { day: 'numeric', month: 'short' })}

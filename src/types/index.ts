@@ -32,7 +32,7 @@ export interface UKTSession {
   date: string;
   location: string;
   regency?: string;
-  status: 'AKTIF' | 'SELESAI';
+  status: 'DIJADWALKAN' | 'AKTIF' | 'SELESAI';
   participants?: number;
   created_at?: string;
 }
